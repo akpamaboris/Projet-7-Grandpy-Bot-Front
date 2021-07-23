@@ -1,6 +1,6 @@
 <div align="center">
 <samp>
-<h1>Projet-7-Grandpy-Bot-Front(FRONTEND IN FLASK-PYTHON)</h1>
+<h1>Projet-7-Grandpy-Bot-Front(FRONTEND IN REACT.JS)</h1>
 <img src="https://i.ibb.co/F7TqxJD/Capture-d-e-cran-2021-07-23-a-14-30-47.png" alt="Capture-d-e-cran-2021-07-23-a-14-30-47" border="0">
   
 
