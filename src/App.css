@@ -1,38 +1,49 @@
-.App {
+.boxChat {
+  max-width: 50%;
+  margin: 0 auto;
+  background-color: #abe5e9;
+  height: 400px;
+  margin-top: 90px;
+}
+.lightAreaChat {
+  height: 80%;
+  width: 100%;
+  background-color: #288e95;
+  color: #f9fdfd;
+  overflow: scroll;
+}
+.searchAreaChat {
+  width: 100%;
+}
+
+.headerPage {
   text-align: center;
+  background-color: #288e95;
+  color: #f9fdfd;
+  padding: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.inputTextChat {
+  width: 70%;
+  margin-top: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.inputSubmitChat {
+  width: 20%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.conversation {
+  padding: 8px;
+  background: #f9fdfd;
+  margin-top: 6px;
+  width: 50%;
+  color: #288e95;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.conversationBot {
+  padding: 8px;
+  background: #edd1e6;
+  margin-top: 6px;
+  width: 50%;
+  color: #288e95;
 }
