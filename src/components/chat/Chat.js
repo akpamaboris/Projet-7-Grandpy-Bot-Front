@@ -1,10 +1,7 @@
-/* global google */
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
 
 import React, { useState } from "react";
-
-const Area = () => <span>Lieu</span>;
 
 const location = {
   center: {
@@ -35,7 +32,6 @@ const Chat = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log(sendData.data.wikipedia);
-      let answer = sendData.data;
       const obj = JSON.parse(sendData.data);
       console.log("obj", obj);
       let emptyArr = [...chatConversation];

@@ -1,5 +1,4 @@
 import "./App.css";
-/* global google */
 
 //  IMPORT COMPONENTS
 import Chat from "./components/chat/Chat";
