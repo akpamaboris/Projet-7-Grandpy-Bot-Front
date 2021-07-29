@@ -1,7 +1,9 @@
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+import Loader from "react-loader-spinner";
 
 const location = {
   center: {
@@ -12,16 +14,27 @@ const location = {
 };
 
 const Chat = () => {
+  const messageRef = useRef();
   const [question, setQuestion] = useState("");
   const [chatConversation, setChatConversation] = useState([
     { text: "Bonjour que puis je faire pour vous?", type: "bot" },
     { text: "Posez moi une question", type: "bot" },
   ]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (messageRef.current) {
+      messageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }
+  });
   // EVENT HANDLER
   const sendMessageOne = (event) => setQuestion(event.target.value);
   const sendQuestionOne = async () => {
     try {
+      setIsLoading(true);
       let formData = new FormData();
       let myUrl = "http://localhost:5000/processing";
       formData.append("question1", question);
@@ -47,8 +60,10 @@ const Chat = () => {
       );
       setChatConversation(emptyArr);
       setQuestion("");
+      setIsLoading(false);
     } catch (error) {
       console.log(error.message);
+      setIsLoading(false);
     }
   };
   return (
@@ -56,7 +71,7 @@ const Chat = () => {
       <div className="lightAreaChat">
         {chatConversation.map((text, id) => {
           return (
-            <div key={id}>
+            <div key={id} ref={messageRef}>
               {text.type === "bot" ? (
                 <>
                   {text.lng ? (
@@ -90,6 +105,15 @@ const Chat = () => {
           className="inputSubmitChat"
           onClick={sendQuestionOne}
         />
+        {isLoading ? (
+          <Loader
+            type="Circles"
+            color="#00BFFF"
+            height={30}
+            width={30}
+            timeout={30000} //3 secs
+          />
+        ) : null}
       </div>
     </div>
   );
