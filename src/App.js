@@ -2,6 +2,7 @@ import "./App.css";
 
 //  IMPORT COMPONENTS
 import Chat from "./components/chat/Chat";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <h1>GrandPy Bot 👴</h1>
       </div>
       <Chat />
+      <Footer />
     </div>
   );
 }

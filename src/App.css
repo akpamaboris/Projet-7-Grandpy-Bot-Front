@@ -1,12 +1,21 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .boxChat {
-  max-width: 50%;
+  max-width: 65%;
   margin: 0 auto;
   background-color: #abe5e9;
-  height: 400px;
-  margin-top: 90px;
+  height: 570px;
+  margin-top: 60px;
 }
 .lightAreaChat {
-  height: 80%;
+  height: 90%;
   width: 100%;
   background-color: #288e95;
   color: #f9fdfd;
@@ -36,14 +45,30 @@
   padding: 8px;
   background: #f9fdfd;
   margin-top: 6px;
-  width: 50%;
+  max-width: 50%;
+  min-width: 50%;
   color: #288e95;
+  margin-bottom: 20px;
 }
 
 .conversationBot {
   padding: 8px;
   background: #edd1e6;
   margin-top: 6px;
-  width: 50%;
+  max-width: 50%;
+  min-width: 50%;
   color: #288e95;
+  margin-left: 420px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 500px) and (max-width: 1000px) {
+  .conversationBot {
+    margin-left: 300px;
+  }
+}
+@media (min-width: 0px) and (max-width: 500px) {
+  .conversationBot {
+    margin-left: 100px;
+  }
 }

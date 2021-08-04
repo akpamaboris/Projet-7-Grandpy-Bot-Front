@@ -5,13 +5,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Loader from "react-loader-spinner";
 
-const location = {
-  center: {
-    lat: 10.99835602,
-    lng: 77.01502627,
-  },
-  zoom: 11,
-};
+import marker from "../../ressources/images/marker.png";
+
+const AnyReactComponent = ({ text }) => (
+  <div style={{ color: "red", fontSize: "20px" }}>
+    {text}{" "}
+    <img src={marker} alt="marker element on map" style={{ width: "30px" }} />
+  </div>
+);
 
 const Chat = () => {
   const messageRef = useRef();
@@ -56,6 +57,7 @@ const Chat = () => {
           type: "bot",
           lat: obj.lat,
           lng: obj.lng,
+          url: obj.url,
         }
       );
       setChatConversation(emptyArr);
@@ -79,11 +81,27 @@ const Chat = () => {
                       <GoogleMapReact
                         apiKey="AIzaSyCFRB_ipsZztDSGoRwKOsnhXiWOKzi2YyU"
                         defaultCenter={{ lat: text.lat, lng: text.lng }}
-                        defaultZoom={location.zoom}
-                      ></GoogleMapReact>
+                        defaultZoom={14}
+                        options={{ scrollwheel: false }}
+                      >
+                        <AnyReactComponent lat={text.lat} lng={text.lng} />
+                      </GoogleMapReact>
                     </div>
                   ) : null}
-                  <div className="conversationBot">Bot 👴 : {text.text}</div>
+                  <div className="conversationBot">
+                    Bot 👴 : {text.text}{" "}
+                    {text.url ? (
+                      <div>
+                        <br />
+                        pour en savoir davantage, cliquez ici pour accéder au
+                        lien wikipedia{" "}
+                        <a href={text.url} target="_blank" rel="noreferrer">
+                          {" "}
+                          ICI{" "}
+                        </a>{" "}
+                      </div>
+                    ) : null}
+                  </div>
                 </>
               ) : (
                 <div className="conversation">Humain 👱‍♂️👩‍🦱 : {text.text}</div>
