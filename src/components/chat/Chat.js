@@ -58,6 +58,7 @@ const Chat = () => {
           lat: obj.lat,
           lng: obj.lng,
           url: obj.url,
+          adress: obj.destination,
         }
       );
       setChatConversation(emptyArr);
@@ -90,6 +91,11 @@ const Chat = () => {
                   ) : null}
                   <div className="conversationBot">
                     Bot 👴 : {text.text}{" "}
+                    {text.adress ? (
+                      <div>
+                        <br /> <p>l'adresse est {text.adress}</p>
+                      </div>
+                    ) : null}
                     {text.url ? (
                       <div>
                         <br />
