@@ -37,7 +37,7 @@ const Chat = () => {
     try {
       setIsLoading(true);
       let formData = new FormData();
-      let myUrl = "http://localhost:5000/processing";
+      let myUrl = "https://akakakaak.herokuapp.com/processing";
       formData.append("question1", question);
       const sendData = await axios({
         method: "post",
@@ -77,6 +77,12 @@ const Chat = () => {
             <div key={id} ref={messageRef}>
               {text.type === "bot" ? (
                 <>
+                  {text.adress ? (
+                    <div className="conversationBot">
+                      <br /> <p> Bot 👴 : l'adresse est {text.adress}</p>
+                    </div>
+                  ) : null}
+
                   {text.lng ? (
                     <div style={{ height: "200px", width: "100%" }}>
                       <GoogleMapReact
@@ -89,13 +95,9 @@ const Chat = () => {
                       </GoogleMapReact>
                     </div>
                   ) : null}
+
                   <div className="conversationBot">
                     Bot 👴 : {text.text}{" "}
-                    {text.adress ? (
-                      <div>
-                        <br /> <p>l'adresse est {text.adress}</p>
-                      </div>
-                    ) : null}
                     {text.url ? (
                       <div>
                         <br />
