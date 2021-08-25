@@ -6,6 +6,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Loader from "react-loader-spinner";
 
 import marker from "../../ressources/images/marker.png";
+import { useHotkeys } from "react-hotkeys-hook";
+import hotkeys from "hotkeys-js";
+
+import KeyboardEventHandler from "react-keyboard-event-handler";
 
 const AnyReactComponent = ({ text }) => (
   <div style={{ color: "red", fontSize: "20px" }}>
@@ -17,6 +21,8 @@ const AnyReactComponent = ({ text }) => (
 const Chat = () => {
   const messageRef = useRef();
   const [question, setQuestion] = useState("");
+  const [deactivateSubmitButton, setDeactivateSubmitButton] = useState(false);
+
   const [chatConversation, setChatConversation] = useState([
     { text: "Bonjour que puis je faire pour vous?", type: "bot" },
     { text: "Posez moi une question", type: "bot" },
@@ -31,10 +37,14 @@ const Chat = () => {
       });
     }
   });
+
   // EVENT HANDLER
-  const sendMessageOne = (event) => setQuestion(event.target.value);
+  const sendMessageOne = (event) => {
+    setQuestion(event.target.value);
+  };
   const sendQuestionOne = async () => {
     try {
+      setDeactivateSubmitButton(true);
       setIsLoading(true);
       let formData = new FormData();
       let myUrl = "https://akakakaak.herokuapp.com/processing";
@@ -45,9 +55,9 @@ const Chat = () => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log(sendData.data.wikipedia);
+      // console.log(sendData.data.wikipedia);
       const obj = JSON.parse(sendData.data);
-      console.log("obj", obj);
+      // console.log("obj", obj);
       let emptyArr = [...chatConversation];
 
       emptyArr.push(
@@ -64,17 +74,28 @@ const Chat = () => {
       setChatConversation(emptyArr);
       setQuestion("");
       setIsLoading(false);
+      setDeactivateSubmitButton(false);
     } catch (error) {
       console.log(error.message);
       setIsLoading(false);
+      setDeactivateSubmitButton(false);
     }
   };
+
   return (
     <div className="boxChat">
       <div className="lightAreaChat">
         {chatConversation.map((text, id) => {
           return (
             <div key={id} ref={messageRef}>
+              <KeyboardEventHandler
+                handleKeys={["Enter"]}
+                onKeyEvent={(key, e) => {
+                  if (question.length > 0) {
+                    sendQuestionOne();
+                  }
+                }}
+              />
               {text.type === "bot" ? (
                 <>
                   {text.adress ? (
@@ -124,12 +145,24 @@ const Chat = () => {
           className="inputTextChat"
           onChange={sendMessageOne}
           value={question}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              if (question.length > 0) {
+                sendQuestionOne();
+              }
+            }
+          }}
         />
         <input
           type="button"
           value="submit"
           className="inputSubmitChat"
-          onClick={sendQuestionOne}
+          disabled={deactivateSubmitButton}
+          onClick={() => {
+            if (question.length > 0) {
+              sendQuestionOne();
+            }
+          }}
         />
         {isLoading ? (
           <Loader
