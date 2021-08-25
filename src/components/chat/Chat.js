@@ -6,8 +6,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Loader from "react-loader-spinner";
 
 import marker from "../../ressources/images/marker.png";
-import { useHotkeys } from "react-hotkeys-hook";
-import hotkeys from "hotkeys-js";
 
 import KeyboardEventHandler from "react-keyboard-event-handler";
 
