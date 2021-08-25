@@ -58,7 +58,7 @@ const Chat = () => {
       const obj = JSON.parse(sendData.data);
       // console.log("obj", obj);
       let emptyArr = [...chatConversation];
-      console.log(obj);
+      // console.log(obj);
 
       emptyArr.push(
         { text: question, type: "human" },
