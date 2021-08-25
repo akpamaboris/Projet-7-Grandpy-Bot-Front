@@ -46,6 +46,7 @@ const Chat = () => {
       setIsLoading(true);
       let formData = new FormData();
       let myUrl = "https://akakakaak.herokuapp.com/processing";
+      // let myUrl = "http://192.168.1.58:5000/processing";
       formData.append("question1", question);
       const sendData = await axios({
         method: "post",
@@ -57,6 +58,7 @@ const Chat = () => {
       const obj = JSON.parse(sendData.data);
       // console.log("obj", obj);
       let emptyArr = [...chatConversation];
+      console.log(obj);
 
       emptyArr.push(
         { text: question, type: "human" },
